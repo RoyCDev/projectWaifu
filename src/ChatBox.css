@@ -1,0 +1,53 @@
+@font-face {
+    font-family: KristenITC;
+    src: url("assets/ITCKRIST.TTF")
+}
+
+.AiChatBox {
+    font-size: 15px;
+    width: 375px;
+}
+
+.userChatBox {
+    font-size: 20px;
+    width: 750px;
+}
+
+.AiChatBox,
+.userChatBox {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    padding: 9px 6px;
+    margin-top: -10px;
+}
+
+textarea {
+    resize: none;
+    font-size: inherit;
+    font-family: KristenITC;
+    background-color: transparent;
+    width: calc(100% - 6px);
+    display: block;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+    padding: 3px 9px 0 7.5px;
+    border-radius: 0.25em;
+    border: none;
+    outline: 1px dashed rgba(122, 122, 122, 0.5);
+    outline-offset: 4px;
+    cursor: auto;
+}
+
+textarea[readOnly] {
+    cursor: default;
+}
+
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+}
