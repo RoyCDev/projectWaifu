@@ -1,7 +1,47 @@
 body {
-    background: url(https://wallpx.com/image/2021/07/sand-castle-seagulls-anime-seascape-clouds-beach-summer.jpg);
-    background-repeat: no-repeat;
-    /* background-size: 100vw 100vh; */
-    background-size: cover;
-    /* zoom: 1.3; */
+    margin: 0;
+    background-color: #191919;
+
+    /* prolly need another container later */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: url("assets/background/sand-castle-seagulls-anime-seascape-clouds-beach-summer.jpg");
+    background-size: 100% 100%;
+    z-index: 0;
+}
+
+.chat-container1,
+.chat-container2 {
+    width: fit-content;
+    position: absolute;
+}
+
+.chat-container1 {
+    top: 75px;
+    left: 200px;
+}
+
+.chat-container2 {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 35px;
+    zoom: 1.2;
+}
+
+.chat-container1 img[alt="AI avatar"] {
+    -webkit-user-drag: none;
+    position: absolute;
+    width: 410px;
+    left: 285px;
+    top: -15px;
+    z-index: -1;
 }
