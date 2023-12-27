@@ -3,8 +3,16 @@ import "./ChatBox.css"
 function ChatBox({ className, showOption, ...rest }) {
     return (
         <div className={className}>
-            <textarea rows="4" {...rest}></textarea >
-            {/* {showOption && <p className="nav">hi</p>} */}
+            <textarea rows="3" {...rest}></textarea >
+            {showOption &&
+                <nav className="chatBoxNav">
+                    <ul>
+                        <li>Chat History</li>
+                        <li>Shop</li>
+                        <li>Preferences</li>
+                    </ul>
+                </nav>
+            }
         </div>
     )
 }

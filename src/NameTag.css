@@ -15,6 +15,7 @@
     margin: 0;
     line-height: 1;
 
+    user-select: none;
     position: relative;
     z-index: 1;
 }
@@ -26,5 +27,5 @@
 
 .userTag {
     font-size: 40px;
-    padding: 8px 20px 0px;
+    padding: 8px 20px 0px 40px;
 }

@@ -4,7 +4,7 @@
 }
 
 .AiChatBox {
-    font-size: 15px;
+    font-size: 14px;
     width: 375px;
     padding: 16px 6px 12px 6px;
     border-radius: 18px;
@@ -15,7 +15,7 @@
 .userChatBox {
     font-size: 20px;
     width: 750px;
-    padding: 19px 6px 15px 6px;
+    padding: 19px 6px 6px 6px;
     border-radius: 10px;
     outline-offset: -4px;
     color: #5e5e5e;
@@ -23,7 +23,8 @@
 
 .AiChatBox,
 .userChatBox {
-    background-color: rgba(255, 255, 255, 0.65);
+    font-family: KristenITC;
+    background-color: rgba(255, 255, 255, 0.70);
     margin-top: -14px;
     outline: 1px dashed rgba(122, 122, 122, 0.65);
 }
@@ -31,7 +32,7 @@
 textarea {
     resize: none;
     font-size: inherit;
-    font-family: KristenITC;
+    font-family: inherit;
     color: inherit;
     background-color: transparent;
     width: calc(100% - 6px);
@@ -50,6 +51,11 @@ textarea[readOnly] {
     cursor: default;
 }
 
+textarea::selection {
+    background-color: #5e5e5e;
+    color: white;
+}
+
 textarea::-webkit-scrollbar {
     width: 10px;
 }
@@ -57,4 +63,18 @@ textarea::-webkit-scrollbar {
 textarea::-webkit-scrollbar-thumb {
     background-color: #5e5e5e;
     border-radius: 10px;
+}
+
+.chatBoxNav ul {
+    margin: 0;
+    padding: 0;
+    padding-top: 8px;
+    font-size: 16px;
+    text-align: right;
+    user-select: none;
+}
+
+.chatBoxNav li {
+    display: inline;
+    margin-right: 17px;
 }
