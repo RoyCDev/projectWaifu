@@ -1,16 +1,14 @@
 @font-face {
     font-family: Gabriola;
-    src: url("assets/Gabriola.ttf")
+    src: url("../assets/font/Gabriola.ttf")
 }
 
-.AiTag,
-.userTag {
+.nameTag {
     background-color: black;
     color: white;
     font-family: Gabriola;
 
     width: fit-content;
-    box-sizing: border-box;
     border-radius: 25px;
     margin: 0;
     line-height: 1;
@@ -20,12 +18,12 @@
     z-index: 1;
 }
 
-.AiTag {
+.user1 .nameTag {
     font-size: 32px;
     padding: 5px 15px 0px;
 }
 
-.userTag {
+.user2 .nameTag {
     font-size: 40px;
     padding: 8px 20px 0px 40px;
 }

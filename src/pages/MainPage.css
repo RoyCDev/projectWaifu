@@ -2,7 +2,6 @@ body {
     margin: 0;
     background-color: #191919;
 
-    /* prolly need another container later */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,26 +9,26 @@ body {
 }
 
 .chat {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background: url("assets/background/sand-castle-seagulls-anime-seascape-clouds-beach-summer.jpg");
+    width: 1365.33px;
+    height: 768px;
+    background: url("../assets/background/sand-castle-seagulls-anime-seascape-clouds-beach-summer.jpg");
     background-size: 100% 100%;
     z-index: 0;
+    position: relative;
 }
 
-.chat-container1,
-.chat-container2 {
+.user1,
+.user2 {
     width: fit-content;
     position: absolute;
 }
 
-.chat-container1 {
+.user1 {
     top: 115px;
-    left: 200px;
+    left: 245px;
 }
 
-.chat-container2 {
+.user2 {
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -37,21 +36,26 @@ body {
     zoom: 1.2;
 }
 
-img[alt="AI avatar"],
-img[alt="User avatar"] {
+.user1 .outline,
+.user2 .outline {
+    margin-top: -14px
+}
+
+.user1 img,
+.user2 img {
     -webkit-user-drag: none;
     user-select: none;
     position: absolute;
 }
 
-img[alt="AI avatar"] {
-    width: 410px;
-    left: 275px;
-    top: -55px;
+.user1 img {
+    width: 445px;
+    left: 265px;
+    top: -60px;
     z-index: -1;
 }
 
-img[alt="User avatar"] {
+.user2 img {
     width: 145px;
     left: -55px;
     top: -80px;

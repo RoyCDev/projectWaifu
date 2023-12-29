@@ -1,9 +1,10 @@
-import "./ChatBox.css"
+import Outline from "./Outline";
+import "./TextArea.css"
 
-function ChatBox({ className, showOption, ...rest }) {
+function TextArea({ showOption, ...rest }) {
     return (
-        <div className={className}>
-            <textarea rows="3" {...rest}></textarea >
+        <Outline className="light">
+            <textarea {...rest} rows="3"></textarea>
             {showOption &&
                 <nav className="chatBoxNav">
                     <ul>
@@ -13,8 +14,8 @@ function ChatBox({ className, showOption, ...rest }) {
                     </ul>
                 </nav>
             }
-        </div>
+        </Outline>
     )
 }
 
-export default ChatBox;
+export default TextArea;

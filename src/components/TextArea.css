@@ -1,39 +1,9 @@
-@font-face {
-    font-family: KristenITC;
-    src: url("assets/ITCKRIST.TTF")
-}
-
-.AiChatBox {
-    font-size: 14px;
-    width: 375px;
-    padding: 16px 6px 12px 6px;
-    border-radius: 18px;
-    outline-offset: -6px;
-    color: #5e5e5e;
-}
-
-.userChatBox {
-    font-size: 20px;
-    width: 750px;
-    padding: 19px 6px 6px 6px;
-    border-radius: 10px;
-    outline-offset: -4px;
-    color: #5e5e5e;
-}
-
-.AiChatBox,
-.userChatBox {
-    font-family: KristenITC;
-    background-color: rgba(255, 255, 255, 0.70);
-    margin-top: -14px;
-    outline: 1px dashed rgba(122, 122, 122, 0.65);
-}
-
 textarea {
     resize: none;
     font-size: inherit;
     font-family: inherit;
     color: inherit;
+
     background-color: transparent;
     width: calc(100% - 6px);
     display: block;
@@ -42,6 +12,7 @@ textarea {
 
     box-sizing: border-box;
     padding: 0px 9px 0 7.5px;
+
     border: none;
     outline: none;
     cursor: auto;
@@ -76,5 +47,5 @@ textarea::-webkit-scrollbar-thumb {
 
 .chatBoxNav li {
     display: inline;
-    margin-right: 17px;
+    margin-right: 16px;
 }
