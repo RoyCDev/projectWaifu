@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import AuthForm from "../components/AuthForm";
+import UserProfile from "../components/UserProfile";
 import ChatBox from "../components/ChatBox";
 import AiAvatar from "../assets/avatar/Ai.png"
 import userAvatar from "../assets/avatar/User.png"
@@ -73,7 +73,7 @@ function MainPage() {
 
     return (
         <main className="chat">
-            <AuthForm />
+            <UserProfile />
             <ChatBox
                 className="user1" user="Gemini" avatar={AiAvatar}
                 value={dynamicRes}

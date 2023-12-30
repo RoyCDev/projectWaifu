@@ -1,0 +1,19 @@
+.profile img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12.5px;
+    outline: 2.5px solid black;
+
+    user-select: none;
+}
+
+.profile .nameTag {
+    font-size: 27.5px;
+    text-align: center;
+
+    width: 100%;
+    padding-top: 5px;
+    margin: -3px auto 0;
+    box-sizing: border-box;
+}

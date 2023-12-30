@@ -15,6 +15,7 @@ body {
     background-size: 100% 100%;
     z-index: 0;
     position: relative;
+    zoom: 1.15;
 }
 
 .user1,
@@ -24,7 +25,7 @@ body {
 }
 
 .user1 {
-    top: 115px;
+    top: 111px;
     left: 245px;
 }
 
@@ -60,4 +61,10 @@ body {
     left: -55px;
     top: -80px;
     z-index: 2;
+}
+
+.profile {
+    position: absolute;
+    right: 120px;
+    top: 50px;
 }

@@ -27,7 +27,6 @@ function AuthForm() {
                 'Content-Type': 'application/json',
             }
         })
-        console.log(res)
     }
 
     const toggleMode = () => {
@@ -40,7 +39,7 @@ function AuthForm() {
             <Outline className="dark">
                 {isRegisterMode &&
                     <div>
-                        <label htmlFor="username"> Username </label>
+                        <span><label htmlFor="username"> Username </label></span>
                         <input type="text" name="username" id="username" autoComplete="off" required
                             onChange={handleChange}
                             value={inputs.username || ""} />
@@ -48,14 +47,14 @@ function AuthForm() {
                 }
 
                 <div>
-                    <label htmlFor="email"> Email </label>
+                    <span><label htmlFor="email"> Email </label></span>
                     <input type="email" name="email" id="email" autoComplete="off" required
                         onChange={handleChange}
                         value={inputs.email || ""} />
                 </div>
 
                 <div>
-                    <label htmlFor="password"> Password </label>
+                    <span><label htmlFor="password"> Password </label></span>
                     <input type="password" name="password" id="password" autoComplete="off" required
                         onChange={handleChange}
                         value={inputs.password || ""} />
