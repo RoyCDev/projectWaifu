@@ -1,12 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 
-import Outline from "./Outline";
+import Wrapper from "./Wrapper";
 import "./AuthForm.css"
 
 function AuthForm() {
     const [inputs, setInputs] = useState({});
-    const [errorMsg, setErrorMsg] = useState("incorrect, password must have at least 6 characters");
+    const [errorMsg, setErrorMsg] = useState("Password must have at least 6 characters");
     const [isRegisterMode, setIsRegisterMode] = useState(false);
 
     const handleChange = (e) => {
@@ -19,8 +19,6 @@ function AuthForm() {
     }
 
     const authenticate = async () => {
-        console.log(JSON.stringify(inputs))
-
         const res = await axios.post(`http://52.9.162.97:8080/login`, inputs, {
             withCredentials: true,
             headers: {
@@ -36,7 +34,7 @@ function AuthForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Outline className="dark">
+            <Wrapper className="dark">
                 {isRegisterMode &&
                     <div>
                         <span><label htmlFor="username"> Username </label></span>
@@ -71,7 +69,7 @@ function AuthForm() {
                         </li>
                     </ul>
                 </nav>
-            </Outline>
+            </Wrapper>
         </form >
 
     )

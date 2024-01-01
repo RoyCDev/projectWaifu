@@ -1,11 +1,11 @@
 import classNames from "classnames";
-import "./Outline.css"
+import "./Wrapper.css"
 
-function Outline({ className, children }) {
+function Wrapper({ className, children }) {
     const classes = classNames("outline", className)
     return (
         <div className={classes}>{children}</div>
     )
 }
 
-export default Outline;
+export default Wrapper;

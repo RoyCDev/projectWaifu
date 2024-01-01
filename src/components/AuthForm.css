@@ -1,12 +1,12 @@
 form .dark {
     width: 175px;
-    right: 100px;
+    right: 120px;
 
     padding: 18px 15px;
     border-radius: 12px;
-    outline-offset: -6px;
     position: absolute;
-    zoom: 1.1;
+    transform-origin: top;
+    scale: 1.1;
 }
 
 .dark input,

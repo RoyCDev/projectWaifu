@@ -7,16 +7,26 @@
     font-family: KristenITC;
 }
 
-.light {
+.light,
+.light-outline {
     background-color: rgba(255, 255, 255, 0.70);
-    outline: 1px dashed rgba(122, 122, 122, 0.65);
     color: #5e5e5e;
 }
 
-.dark {
+.light-outline {
+    outline: 1px dashed rgba(122, 122, 122, 0.35);
+    outline-offset: -6px;
+}
+
+.dark,
+.dark-outline {
     background-color: rgba(0, 0, 0, 0.75);
-    outline: 1px dashed rgba(255, 255, 255, 0.15);
     color: white;
+}
+
+.dark-outline {
+    outline: 1px dashed rgba(0, 0, 0, 0.35);
+    outline-offset: -6px;
 }
 
 .user1 .outline {
@@ -24,7 +34,6 @@
     width: 375px;
     padding: 16px 6px 12px 6px;
     border-radius: 18px;
-    outline-offset: -4px;
 }
 
 .user2 .outline {
@@ -32,5 +41,4 @@
     width: 750px;
     padding: 19px 6px 6px 6px;
     border-radius: 10px;
-    outline-offset: -6px;
 }

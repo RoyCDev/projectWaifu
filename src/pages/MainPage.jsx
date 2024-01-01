@@ -3,6 +3,8 @@ import axios from "axios";
 
 import UserProfile from "../components/UserProfile";
 import ChatBox from "../components/ChatBox";
+import ChatBoxInput from "../components/ChatBoxInput";
+import ChatHistory from "../components/ChatHistory";
 import AiAvatar from "../assets/avatar/Ai.png"
 import userAvatar from "../assets/avatar/User.png"
 import "./MainPage.css"
@@ -13,6 +15,8 @@ function MainPage() {
     const [resObj, setResObj] = useState({ text: "" })
     const [dynamicRes, setDynamicRes] = useState();
     const [currentIndex, setCurrentIndex] = useState();
+
+    const [isLogVisible, setIsLogVisible] = useState(false)
 
     // Notes regarding handleChange and handleEnter
     // 1.         enter = submit input 
@@ -54,6 +58,10 @@ function MainPage() {
         }
     }
 
+    const handleLogClick = () => {
+        setIsLogVisible(prev => !prev);
+    }
+
     // Typewriter effect, no user typing/submit during this
     useEffect(() => {
         if (currentIndex < resObj.text.length) {
@@ -74,19 +82,19 @@ function MainPage() {
     return (
         <main className="chat">
             <UserProfile />
-            <ChatBox
+            <ChatBox lightOutline rows={3}
                 className="user1" user="Gemini" avatar={AiAvatar}
-                value={dynamicRes}
-                readOnly />
+                value={dynamicRes} />
 
-            <ChatBox
+            <ChatBoxInput lightOutline rows={3}
                 className="user2" user="Yahallo" avatar={userAvatar}
-                placeholder="<Type Something Here>"
                 value={userQuery}
                 readOnly={isReadOnly}
                 onChange={handleChange}
                 onKeyDown={handleEnter}
-                showOption />
+                onLogClick={handleLogClick} />
+
+            {isLogVisible && <ChatHistory />}
         </main>
     )
 }

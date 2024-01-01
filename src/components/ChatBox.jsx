@@ -1,13 +1,22 @@
 import NameTag from "./NameTag"
 import TextArea from "./TextArea";
 
-function ChatBox({ className, user, avatar, ...rest }) {
+import classNames from "classnames";
+
+function ChatBox({ className, user, avatar, light, lightOutline, dark, darkOutline, ...rest }) {
+    const style = classNames({
+        "light": light,
+        "light-outline": lightOutline,
+        "dark": dark,
+        "dark-outline": darkOutline
+    })
+
     return (
-        <section className={className}>
+        <article className={className}>
             <img src={avatar} alt="" />
             <NameTag>{user}</NameTag>
-            <TextArea {...rest}></TextArea>
-        </section>
+            <TextArea readOnly className={style} {...rest}></TextArea>
+        </article>
     )
 }
 

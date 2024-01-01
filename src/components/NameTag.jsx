@@ -1,8 +1,8 @@
 import "./NameTag.css"
 
-function NameTag({ children }) {
+function NameTag({ children, ...rest }) {
     return (
-        <p className="nameTag">{children}</p >
+        <p className="nameTag" {...rest}>{children}</p >
     )
 }
 

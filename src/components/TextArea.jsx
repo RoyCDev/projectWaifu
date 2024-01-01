@@ -1,20 +1,26 @@
-import Outline from "./Outline";
+import { useRef, useLayoutEffect } from "react";
+
+import Wrapper from "./Wrapper";
 import "./TextArea.css"
 
-function TextArea({ showOption, ...rest }) {
+function TextArea({ className, children, ...rest }) {
+    const textArea = useRef()
+
+    const adjustHeight = () => {
+        if (!rest.rows) {
+            textArea.current.style.height = '0px';
+            // textArea.current.style.height = `${textArea.current.scrollHeight + 1}px`
+            setTimeout(() => textArea.current.style.height = `${textArea.current.scrollHeight + 1}px`, 50)
+        }
+    }
+
+    useLayoutEffect(adjustHeight, []);
+
     return (
-        <Outline className="light">
-            <textarea {...rest} rows="3"></textarea>
-            {showOption &&
-                <nav className="chatBoxNav">
-                    <ul>
-                        <li>Chat History</li>
-                        <li>Shop</li>
-                        <li>Preferences</li>
-                    </ul>
-                </nav>
-            }
-        </Outline>
+        <Wrapper className={className}>
+            <textarea ref={textArea} {...rest}></textarea>
+            {children}
+        </Wrapper>
     )
 }
 

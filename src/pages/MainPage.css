@@ -15,7 +15,6 @@ body {
     background-size: 100% 100%;
     z-index: 0;
     position: relative;
-    zoom: 1.15;
 }
 
 .user1,
@@ -27,14 +26,15 @@ body {
 .user1 {
     top: 111px;
     left: 245px;
+
 }
 
 .user2 {
     left: 0;
     right: 0;
     margin: 0 auto;
-    bottom: 35px;
-    zoom: 1.2;
+    bottom: 61px;
+    scale: 1.2;
 }
 
 .user1 .outline,
