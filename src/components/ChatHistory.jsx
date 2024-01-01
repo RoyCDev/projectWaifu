@@ -8,36 +8,8 @@ import userAvatar from "../assets/avatar/guest.png"
 
 import "./ChatHistory.css"
 
-function ChatHistory() {
+function ChatHistory({ log }) {
     const chatContent = useRef()
-
-    const [log, setLog] = useState([
-        {
-            "input": "hello there, Yahallo! ",
-            "response": "What's up my."
-        },
-
-        {
-            "input": "Just thinking about what you've been. You're as sweet as always! ",
-            "response": "Gotta work on your rizz"
-        },
-        {
-            "input": "Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!",
-            "response": "Gotta work on your rizz"
-        },
-        {
-            "input": "gggggggggggggggggggggggggggggggggggggggggggggggg gggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
-            "response": "Gotta work on your rizz"
-        },
-
-        {
-            "input": "I'm sorry. I'll try a better job next time. Anyways, would you like your dinner? or your bath? or ... ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg ggggggggggggggggggggg",
-        }
-    ])
-
-    const requestLog = async () => {
-        setLog(await axios.get("http://52.9.162.97:8080/api/user/history"));
-    }
 
     useLayoutEffect(() => {
         setTimeout(() => chatContent.current.scrollTop = chatContent.current.scrollHeight, 50)

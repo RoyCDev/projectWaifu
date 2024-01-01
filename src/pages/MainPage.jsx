@@ -17,6 +17,12 @@ function MainPage() {
     const [currentIndex, setCurrentIndex] = useState();
 
     const [isLogVisible, setIsLogVisible] = useState(false)
+    const [log, setLog] = useState([])
+
+    const requestLog = async () => {
+        const res = await axios.get("http://52.9.162.97:8080/api/user/history")
+        setLog(res.data);
+    }
 
     // Notes regarding handleChange and handleEnter
     // 1.         enter = submit input 
@@ -94,7 +100,7 @@ function MainPage() {
                 onKeyDown={handleEnter}
                 onLogClick={handleLogClick} />
 
-            {isLogVisible && <ChatHistory />}
+            {isLogVisible && <ChatHistory log={log} />}
         </main>
     )
 }
