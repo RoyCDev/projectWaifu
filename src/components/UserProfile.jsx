@@ -15,8 +15,8 @@ function UserProfile() {
     return (
         <>
             <section className="profile">
-                {isFormVisible && <AuthForm />}
-                <img onClick={handleClick} src={avatar} alt="" />
+                {isFormVisible && <AuthForm setVis={setIsFormVisible} />}
+                <img onClick={handleClick} src={avatar} alt="profile img" />
                 {/* <NameTag onClick={handleClick}>Guest</NameTag> */}
             </section>
         </>

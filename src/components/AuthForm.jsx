@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 import Wrapper from "./Wrapper";
+import Input from "./Input";
 import "./AuthForm.css"
 
-function AuthForm() {
+function AuthForm({ setVis }) {
     const [inputs, setInputs] = useState({});
     const [errorMsg, setErrorMsg] = useState("Password must have at least 6 characters");
     const [isRegisterMode, setIsRegisterMode] = useState(false);
+
+    const form = useRef();
 
     const handleChange = (e) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -19,7 +22,8 @@ function AuthForm() {
     }
 
     const authenticate = async () => {
-        const res = await axios.post(`http://52.9.162.97:8080/login`, inputs, {
+        const endPoint = isRegisterMode ? "register" : "login"
+        const res = await axios.post(`http://52.9.162.97:8080/security/${endPoint}`, inputs, {
             withCredentials: true,
             headers: {
                 'Content-Type': 'application/json',
@@ -32,13 +36,25 @@ function AuthForm() {
         setInputs({})
     }
 
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!form.current.contains(e.target) && e.target.alt !== "profile img") {
+                setVis(false);
+            }
+        }
+        document.addEventListener("click", handleClickOutside, true);
+
+        return () => document.removeEventListener("click", handleClickOutside, true);
+    }, [])
+
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={form}>
             <Wrapper className="dark">
                 {isRegisterMode &&
                     <div>
                         <span><label htmlFor="username"> Username </label></span>
-                        <input type="text" name="username" id="username" autoComplete="off" required
+                        <Input type="text" name="username" id="username"
                             onChange={handleChange}
                             value={inputs.username || ""} />
                     </div>
@@ -46,14 +62,14 @@ function AuthForm() {
 
                 <div>
                     <span><label htmlFor="email"> Email </label></span>
-                    <input type="email" name="email" id="email" autoComplete="off" required
+                    <Input type="email" name="email" id="email"
                         onChange={handleChange}
                         value={inputs.email || ""} />
                 </div>
 
                 <div>
                     <span><label htmlFor="password"> Password </label></span>
-                    <input type="password" name="password" id="password" autoComplete="off" required
+                    <Input type="password" name="password" id="password"
                         onChange={handleChange}
                         value={inputs.password || ""} />
                 </div>

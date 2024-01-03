@@ -17,12 +17,29 @@ function MainPage() {
     const [currentIndex, setCurrentIndex] = useState();
 
     const [isLogVisible, setIsLogVisible] = useState(false)
-    const [log, setLog] = useState([])
+    const [log, setLog] = useState([
+        {
+            "input": "hello there, Yahallo! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! hello there, Yahallo! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! hello there, Yahallo! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! 123 ",
+            "response": "What's up my. Just thinking about what you've been.  Just thinking about what you've been. "
+        },
 
-    const requestLog = async () => {
-        const res = await axios.get("http://52.9.162.97:8080/api/user/history")
-        setLog(res.data);
-    }
+        {
+            "input": "Just thinking about what you've been. You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!v ",
+            "response": "Gotta work on your rizz"
+        },
+        {
+            "input": "Just thinking about what you've been. You're as sweet as always! Just tgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! gggggggggggggggggggggggggggggggggggggggggggggggg",
+            "response": "Gotta work on your rizz"
+        },
+        {
+            "input": "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+            "response": "Gotta work on your rizz"
+        },
+
+        {
+            "input": "I'm sorry. I'll try a better job next time. Anyways, would you like your dinner? or your bath? or ... ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg ggggggggggggggggggggg",
+        }
+    ])
 
     // Notes regarding handleChange and handleEnter
     // 1.         enter = submit input 
@@ -34,14 +51,14 @@ function MainPage() {
     }
 
     const handleEnter = (e) => {
-        if (e.code === "Enter") {
+        if (e.code === "Enter" && !isReadOnly) {
             e.preventDefault()
 
             if (e.shiftKey) {
                 setUserQuery(prevQuery => prevQuery + "\n");
             }
 
-            else if (userQuery.trim() && !isReadOnly) {
+            else if (userQuery.trim()) {
                 chatWithAi(userQuery);
             }
         }
@@ -64,8 +81,17 @@ function MainPage() {
         }
     }
 
-    const handleLogClick = () => {
+    const handleLogClick = async () => {
         setIsLogVisible(prev => !prev);
+        if (!isLogVisible) {
+            const res = await axios.get("http://52.9.162.97:8080/api/user/history", {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            setLog(res.data);
+        }
     }
 
     // Typewriter effect, no user typing/submit during this
@@ -100,7 +126,7 @@ function MainPage() {
                 onKeyDown={handleEnter}
                 onLogClick={handleLogClick} />
 
-            {isLogVisible && <ChatHistory log={log} />}
+            {isLogVisible && <ChatHistory log={log} setVis={setIsLogVisible} />}
         </main>
     )
 }

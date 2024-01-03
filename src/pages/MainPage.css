@@ -44,8 +44,6 @@ body {
 
 .user1 img,
 .user2 img {
-    -webkit-user-drag: none;
-    user-select: none;
     position: absolute;
 }
 
@@ -65,6 +63,11 @@ body {
 
 .profile {
     position: absolute;
-    right: 120px;
+    right: 125px;
     top: 50px;
+}
+
+img {
+    user-select: none;
+    -webkit-user-drag: none;
 }

@@ -1,12 +1,9 @@
 .profile img {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    /* height: 100px; */
     object-fit: cover;
     border-radius: 12.5px;
     outline: 2.5px solid black;
-
-    user-select: none;
-    -webkit-user-drag: none;
 }
 
 .profile .nameTag {
