@@ -49,11 +49,13 @@ function AuthForm({ setVis }) {
 
 
     return (
-        <form onSubmit={handleSubmit} ref={form}>
+        <form className="auth-form" onSubmit={handleSubmit} ref={form}>
             <Wrapper className="dark">
                 {isRegisterMode &&
                     <div>
-                        <span><label htmlFor="username"> Username </label></span>
+                        <span className="border-left">
+                            <label htmlFor="username"> Username </label>
+                        </span>
                         <Input type="text" name="username" id="username"
                             onChange={handleChange}
                             value={inputs.username || ""} />
@@ -61,30 +63,33 @@ function AuthForm({ setVis }) {
                 }
 
                 <div>
-                    <span><label htmlFor="email"> Email </label></span>
+                    <span className="border-left">
+                        <label htmlFor="email"> Email </label>
+                    </span>
                     <Input type="email" name="email" id="email"
                         onChange={handleChange}
                         value={inputs.email || ""} />
                 </div>
 
                 <div>
-                    <span><label htmlFor="password"> Password </label></span>
+                    <span className="border-left">
+                        <label htmlFor="password"> Password </label>
+                    </span>
                     <Input type="password" name="password" id="password"
                         onChange={handleChange}
                         value={inputs.password || ""} />
                 </div>
-                <p>{errorMsg}</p>
+                <p className="errorMsg">{errorMsg}</p>
 
-                <nav>
-                    <ul>
-                        <li onClick={toggleMode}>
-                            {isRegisterMode ? "Go Back to Login" : "Create an Account"}
-                        </li>
-                        <li>
-                            <button>{isRegisterMode ? "Sign Up" : "Login"}</button>
-                        </li>
-                    </ul>
-                </nav>
+                <ul>
+                    <li onClick={toggleMode}>
+                        {isRegisterMode ? "Go Back to Login" : "Create an Account"}
+                    </li>
+                    <li>
+                        <button>{isRegisterMode ? "Sign Up" : "Login"}</button>
+                    </li>
+                </ul>
+
             </Wrapper>
         </form >
 

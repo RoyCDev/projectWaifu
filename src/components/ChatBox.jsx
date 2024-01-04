@@ -15,7 +15,7 @@ function ChatBox({ className, user, avatar, light, lightOutline, dark, darkOutli
         <article className={className}>
             <img src={avatar} alt="" />
             <NameTag>{user}</NameTag>
-            <TextArea readOnly className={style} {...rest}></TextArea>
+            <TextArea readOnly className={style} {...rest} />
         </article>
     )
 }

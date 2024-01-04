@@ -1,6 +1,7 @@
-form .dark {
+.auth-form .dark,
+.profile-details {
     width: 175px;
-    right: 100px;
+    /* right: 100px; */
 
     padding: 18px 15px;
     border-radius: 12px;
@@ -9,24 +10,35 @@ form .dark {
     scale: 1.1;
 }
 
-.dark input,
-.dark li button {
+.auth-form .dark {
+    right: 100px;
+}
+
+form input::selection {
+    background-color: #5e5e5e;
+}
+
+.auth-form input,
+.auth-form button,
+.profile-details input,
+.profile-details button {
     font-family: inherit;
 }
 
-.dark label,
-.dark ul {
+.auth-form label,
+.auth-form ul,
+.profile-details ul {
     user-select: none;
 }
 
-.dark div {
+.auth-form .dark div {
     display: flex;
     flex-direction: column;
     align-items: baseline;
     margin-bottom: 2px;
 }
 
-span::before {
+.border-left::before {
     position: absolute;
     content: "";
     display: inline-block;
@@ -37,14 +49,15 @@ span::before {
     background-color: #707070;
 }
 
-.dark label {
+.auth-form label {
     padding-left: 4px;
     font-size: 9.5px;
     margin-bottom: 2px;
     margin-left: 5px;
 }
 
-.dark input {
+.auth-form input,
+.profile-details input {
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
 
@@ -58,25 +71,29 @@ span::before {
     outline: none;
 }
 
-.dark p {
+.auth-form .errorMsg,
+.profile-details .errorMsg {
     color: yellow;
-    height: 24.73px;
+    height: 24px;
 
     margin: 8px 0 0 8px;
     font-size: 8.5px;
 
 }
 
-.dark li {
+.auth-form li,
+.profile-details li {
     display: inline;
     font-size: 9px;
 }
 
-.dark li:hover {
+.auth-form li:hover,
+.profile-details li:hover {
     color: yellow;
 }
 
-.dark li button {
+.auth-form button,
+.profile-details button {
     background-color: transparent;
     border: none;
     color: inherit;
@@ -86,7 +103,8 @@ span::before {
     margin-top: 3px;
 }
 
-.dark ul {
+.auth-form ul,
+.profile-details ul {
     display: flex;
     flex-direction: column;
 
