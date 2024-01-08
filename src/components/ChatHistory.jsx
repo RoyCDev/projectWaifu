@@ -7,7 +7,7 @@ import userAvatar from "../assets/avatar/guest.png"
 
 import "./ChatHistory.css"
 
-function ChatHistory({ log, setVis }) {
+function ChatHistory({ log, setVis, username }) {
     const logContainer = useRef();
     const logContent = useRef();
 
@@ -31,11 +31,11 @@ function ChatHistory({ log, setVis }) {
         return (
             <>
                 <ChatBox light
-                    className="past-convo u2" user="Yahallo" avatar={userAvatar}
+                    className="past-convo u2" username={username} avatar={userAvatar}
                     value={entry.input} />
 
                 <ChatBox light
-                    className="past-convo u1" user="Gemini" avatar={AiAvatar}
+                    className="past-convo u1" username="Gemini" avatar={AiAvatar}
                     value={entry.response} />
             </>
         )

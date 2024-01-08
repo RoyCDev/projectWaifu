@@ -1,33 +1,29 @@
-import { useState } from "react";
-import Wrapper from "./Wrapper";
+import { useState, useEffect, useRef } from "react";
 import Input from "./Input";
 import TextArea from "./TextArea"
+import ErrorMsg from "./ErrorMsg";
 
 import { MdEdit, MdSave } from "react-icons/md";
 import { BsFillPeopleFill, BsFillChatFill } from "react-icons/bs";
-
-import axios from "axios";
-import classNames from "classnames";
+import { apiRequest } from "../util";
 import "./UserProfileDetails.css"
 
-function UserProfileDetails() {
+function UserProfileDetails({ setVis, user, setUser, setIsLoggedIn }) {
     const [isEditBioMode, setIsEditBioMode] = useState(false);
     const [isEditPwMode, setIsEditPwMode] = useState(false);
 
-    const errorMsgClasses = classNames("errorMsg", {
-        "default": isEditPwMode
-    })
-
-    const [inputs, setInputs] = useState({
-        username: "Yahallo",
-        desc: "Mathi, grinds for unique scores for ages finally achieves his first 1k with a pretty epic map, mrekk permazoomer bad mannered elementary schooler kid"
-    });
+    const profile = useRef()
+    const [bio, setBio] = useState({ username: user.username, desc: user.desc });
+    const [pw, setPw] = useState()
+    const [errorMsg, setErrorMsg] = useState()
 
     const handleBioChange = (e) => {
-        setInputs({ ...inputs, [e.target.name]: e.target.value });
+        setBio({ ...bio, [e.target.name]: e.target.value });
     }
 
-    const [errorMsg, setErrorMsg] = useState("");
+    const handlePwChange = (e) => {
+        setPw({ ...pw, [e.target.name]: e.target.value })
+    }
 
     const setToEditBioMode = () => {
         setIsEditBioMode(true);
@@ -39,26 +35,71 @@ function UserProfileDetails() {
         setIsEditBioMode(false);
     }
 
-    const cancelEditMode = () => {
+    const cancelEdit = () => {
         setIsEditBioMode(false);
+        setBio({ username: user.username, desc: user.desc });
         setIsEditPwMode(false);
+        setPw();
     }
 
-    // const handleBioSubmit = () => {
-    //     const res = axios.post();
-    //     setErrorMsg(res.data);
-    //     if success -> cancelEditMode
-    // }
+    const handleBioSubmit = async (e) => {
+        e.preventDefault();
 
-    // const handlePwSubmit = () => {
-    //     const res = axios.post();
-    //     setErrorMsg(res.data);
-    //     if success -> cancelEditMode
-    // }
+        if (bio.desc !== user.desc) {
+            const res = await apiRequest("POST", "/api/user/change/description", bio.desc);
+            // const res = { message: "success" }
+            setErrorMsg(res.message)
+            setUser({ ...user, desc: bio.desc })
+        }
+
+        if (bio.username !== user.username) {
+            const res = await apiRequest("POST", "/api/user/change/username", bio.username);
+            // const res = { message: "success" }
+            if (res.message.indexOf("success") !== -1) {
+                setUser({ ...user, username: bio.username })
+                setIsEditBioMode(false);
+                setIsEditPwMode(false);
+            }
+            setErrorMsg(res.message)
+        }
+
+        else {
+            setIsEditBioMode(false);
+            setIsEditPwMode(false);
+        }
+    }
+
+    const handlePwSubmit = async (e) => {
+        e.preventDefault();
+
+        const res = await apiRequest("POST", "/api/user/change/password", pw);
+        if (res.message.indexOf("success") !== -1) {
+            cancelEdit()
+        }
+        setErrorMsg(res.message)
+    }
+
+    const handleLogout = async () => {
+        await apiRequest("POST", "/security/logout", {});
+        setVis(false);
+        setIsLoggedIn(false);
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!profile.current.contains(e.target) && e.target.alt !== "profile img") {
+                setVis(false);
+            }
+        }
+        document.addEventListener("click", handleClickOutside, true);
+
+        return () => document.removeEventListener("click", handleClickOutside, true);
+    }, [])
 
     return (
-        <Wrapper className="dark profile-details">
-            <form className="bio-form">
+        <div className="dark outline profile-details" ref={profile}>
+            {!!errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+            <form className="bio-form" onSubmit={handleBioSubmit}>
                 <p className="bio-header">About Me
                     {isEditBioMode ?
                         <button><MdSave /></button> :
@@ -66,20 +107,16 @@ function UserProfileDetails() {
                     }
                 </p>
 
-                <div className="username">
-                    <span className="border-left">
-                        <label htmlFor="username"></label>
-                    </span>
-                    <Input type="text" name="username" id="username" readOnly={!isEditBioMode}
-                        placeholder="Username"
-                        value={inputs.username}
-                        onChange={handleBioChange}
-                    />
-                </div>
+                <Input leftBorder type="text" name="username" className="username"
+                    placeholder="Username"
+                    value={bio.username}
+                    readOnly={!isEditBioMode}
+                    onChange={handleBioChange}
+                />
 
                 <label htmlFor="desc"></label>
                 <TextArea className="dark" name="desc" rows={4} readOnly={!isEditBioMode}
-                    value={inputs.desc}
+                    value={bio.desc}
                     onChange={handleBioChange} />
             </form>
 
@@ -95,29 +132,28 @@ function UserProfileDetails() {
 
             {
                 isEditPwMode &&
-                <form className="pw-form">
+                <form className="pw-form" onSubmit={handlePwSubmit}>
                     <p className="pw-header">Change Password
                         <button><MdSave /></button>
                     </p>
-                    <label htmlFor="currentPw"></label>
-                    <Input type="password" name="currentPw" id="currentPw"
-                        placeholder="Current"></Input>
-                    <label htmlFor="newPw"></label>
-                    <Input type="password" name="newPw" id="newPw"
-                        placeholder="New"></Input>
+
+                    <Input type="password" name="current" placeholder="Current"
+                        value={pw?.current || ""}
+                        onChange={handlePwChange} />
+                    <Input type="password" name="new" placeholder="New"
+                        value={pw?.new || ""}
+                        onChange={handlePwChange} />
                 </form>
             }
-
-            <p className={errorMsgClasses}>{errorMsg}</p>
 
             <ul>
                 {(!isEditBioMode && !isEditPwMode) ?
                     <li onClick={setToEditPwMode}> Change Password </li> :
-                    <li onClick={cancelEditMode}> Cancel edits </li>
+                    <li onClick={cancelEdit}> Cancel edits </li>
                 }
-                <li><button>Logout</button></li>
+                <li><button onClick={handleLogout}>Logout</button></li>
             </ul>
-        </Wrapper >
+        </div >
     )
 }
 

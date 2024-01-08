@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import { apiRequest } from "../util";
 
-import Wrapper from "./Wrapper";
+import ErrorMsg from "./ErrorMsg"
 import Input from "./Input";
 import "./AuthForm.css"
 
-function AuthForm({ setVis }) {
-    const [inputs, setInputs] = useState({});
-    const [errorMsg, setErrorMsg] = useState("Password must have at least 6 characters");
+function AuthForm({ setVis, setIsLoggedIn }) {
+    const [inputs, setInputs] = useState();
     const [isRegisterMode, setIsRegisterMode] = useState(false);
+    const [errorMsg, setErrorMsg] = useState()
 
-    const form = useRef();
+    const auth = useRef();
 
     const handleChange = (e) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -22,23 +22,33 @@ function AuthForm({ setVis }) {
     }
 
     const authenticate = async () => {
-        const endPoint = isRegisterMode ? "register" : "login"
-        const res = await axios.post(`http://52.9.162.97:8080/security/${endPoint}`, inputs, {
-            withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
+        const endPoint = isRegisterMode ? "register" : "login";
+        const res = await apiRequest("POST", `/security/${endPoint}`, inputs);
+
+        if (res.message.indexOf("success") !== -1) {
+            setVis(false);
+            setIsLoggedIn(true);
+        }
+        else {
+            setErrorMsg(res.message);
+        }
     }
 
     const toggleMode = () => {
+        setInputs()
         setIsRegisterMode(prev => !prev);
-        setInputs({})
+
+        if (!isRegisterMode) {
+            setErrorMsg("Password must have at least 6 characters");
+        }
+        else {
+            setErrorMsg();
+        }
     }
 
     useEffect(() => {
         const handleClickOutside = (e) => {
-            if (!form.current.contains(e.target) && e.target.alt !== "profile img") {
+            if (!auth.current.contains(e.target) && e.target.alt !== "profile img") {
                 setVis(false);
             }
         }
@@ -49,37 +59,22 @@ function AuthForm({ setVis }) {
 
 
     return (
-        <form className="auth-form" onSubmit={handleSubmit} ref={form}>
-            <Wrapper className="dark">
+        <div className="dark outline auth" ref={auth}>
+            {!!errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+            <form className="auth-form" onSubmit={handleSubmit}>
                 {isRegisterMode &&
-                    <div>
-                        <span className="border-left">
-                            <label htmlFor="username"> Username </label>
-                        </span>
-                        <Input type="text" name="username" id="username"
-                            onChange={handleChange}
-                            value={inputs.username || ""} />
-                    </div>
+                    <Input leftBorder type="text" name="username" label="Username"
+                        onChange={handleChange}
+                        value={inputs?.username || ""} />
                 }
 
-                <div>
-                    <span className="border-left">
-                        <label htmlFor="email"> Email </label>
-                    </span>
-                    <Input type="email" name="email" id="email"
-                        onChange={handleChange}
-                        value={inputs.email || ""} />
-                </div>
+                <Input leftBorder type="email" name="email" label="Email"
+                    onChange={handleChange}
+                    value={inputs?.email || ""} />
 
-                <div>
-                    <span className="border-left">
-                        <label htmlFor="password"> Password </label>
-                    </span>
-                    <Input type="password" name="password" id="password"
-                        onChange={handleChange}
-                        value={inputs.password || ""} />
-                </div>
-                <p className="errorMsg">{errorMsg}</p>
+                <Input leftBorder type="password" name="password" label="Password"
+                    onChange={handleChange}
+                    value={inputs?.password || ""} />
 
                 <ul>
                     <li onClick={toggleMode}>
@@ -90,8 +85,8 @@ function AuthForm({ setVis }) {
                     </li>
                 </ul>
 
-            </Wrapper>
-        </form >
+            </form>
+        </div >
 
     )
 }

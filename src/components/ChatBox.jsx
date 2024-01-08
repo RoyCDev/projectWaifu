@@ -3,7 +3,7 @@ import TextArea from "./TextArea";
 
 import classNames from "classnames";
 
-function ChatBox({ className, user, avatar, light, lightOutline, dark, darkOutline, ...rest }) {
+function ChatBox({ className, username, avatar, light, lightOutline, dark, darkOutline, ...rest }) {
     const style = classNames({
         "light": light,
         "light-outline": lightOutline,
@@ -14,7 +14,7 @@ function ChatBox({ className, user, avatar, light, lightOutline, dark, darkOutli
     return (
         <article className={className}>
             <img src={avatar} alt="" />
-            <NameTag>{user}</NameTag>
+            <NameTag>{username}</NameTag>
             <TextArea readOnly className={style} {...rest} />
         </article>
     )

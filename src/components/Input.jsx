@@ -1,15 +1,24 @@
-function Input({ ...rest }) {
+function Input({ className, leftBorder, name, label, ...rest }) {
     const handleDragDrop = (e) => {
         e.dataTransfer.effectAllowed = "none"
         e.preventDefault();
     }
+
     return (
-        <input required
-            onDragStart={handleDragDrop}
-            onDrop={handleDragDrop}
-            autoComplete="off"
-            {...rest}
-        />
+        <div className={className}>
+            <span className={leftBorder ? "border-left" : undefined}>
+                <label htmlFor={name}>{label}</label>
+            </span>
+            <input
+                name={name}
+                id={name}
+                onDragStart={handleDragDrop}
+                onDrop={handleDragDrop}
+                autoComplete="off"
+                required
+                {...rest}
+            />
+        </div>
     )
 }
 

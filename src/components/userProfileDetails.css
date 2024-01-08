@@ -1,6 +1,5 @@
 .profile-details {
     padding: 18px 15px 16px;
-    right: 100px;
 }
 
 .profile-details svg {
@@ -57,7 +56,7 @@
     font-size: 9px;
     background-color: rgba(0, 0, 0, 0.65);
 
-    margin: 4px 0 8px 0;
+    margin: 4px 0 6px 0;
     padding: 3px 3px 0 0;
     border-radius: 5px;
 }
@@ -76,7 +75,7 @@
 }
 
 .stats {
-    width: 95%;
+    width: 97%;
     margin: 0 auto;
 
     display: grid;
@@ -96,6 +95,11 @@
 
 .stats span:nth-child(3n) {
     justify-self: end;
+}
+
+.stats svg {
+    font-size: 12.5px;
+    align-self: center;
 }
 
 .stats .number {
@@ -125,13 +129,10 @@
 
 .pw-form {
     display: grid;
-    row-gap: 1px;
+    row-gap: 2px;
+    margin-bottom: -29px;
 }
 
-.profile-details .errorMsg {
-    margin-left: 6px;
-}
-
-.errorMsg.default {
-    height: inherit;
+.pw-form div {
+    display: flex;
 }

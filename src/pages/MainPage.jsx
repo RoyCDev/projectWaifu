@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { apiRequest } from "../util";
 
 import UserProfile from "../components/UserProfile";
 import ChatBox from "../components/ChatBox";
@@ -9,37 +9,15 @@ import AiAvatar from "../assets/avatar/Ai.png"
 import userAvatar from "../assets/avatar/User.png"
 import "./MainPage.css"
 
-function MainPage() {
+function MainPage({ user, setUser, isLoggedIn, setIsLoggedIn }) {
     const [userQuery, setUserQuery] = useState();
     const [isReadOnly, setIsReadOnly] = useState(false);
     const [resObj, setResObj] = useState({ text: "" })
     const [dynamicRes, setDynamicRes] = useState();
     const [currentIndex, setCurrentIndex] = useState();
 
-    const [isLogVisible, setIsLogVisible] = useState(false)
-    const [log, setLog] = useState([
-        {
-            "input": "hello there, Yahallo! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! hello there, Yahallo! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! hello there, Yahallo! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! 123 ",
-            "response": "What's up my. Just thinking about what you've been.  Just thinking about what you've been. "
-        },
-
-        {
-            "input": "Just thinking about what you've been. You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always!v ",
-            "response": "Gotta work on your rizz"
-        },
-        {
-            "input": "Just thinking about what you've been. You're as sweet as always! Just tgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. You're as sweet as always! Just thinking about what you've been. Just thinking about what you've been. You're as sweet as always! You're as sweet as always! gggggggggggggggggggggggggggggggggggggggggggggggg",
-            "response": "Gotta work on your rizz"
-        },
-        {
-            "input": "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
-            "response": "Gotta work on your rizz"
-        },
-
-        {
-            "input": "I'm sorry. I'll try a better job next time. Anyways, would you like your dinner? or your bath? or ... ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg ggggggggggggggggggggg",
-        }
-    ])
+    const [showLog, setShowLog] = useState(false)
+    const [log, setLog] = useState([])
 
     // Notes regarding handleChange and handleEnter
     // 1.         enter = submit input 
@@ -66,31 +44,28 @@ function MainPage() {
 
     const chatWithAi = async (query) => {
         setIsReadOnly(true);
-        try {
-            const res = await axios.post(`http://52.9.162.97:8080/api/chat/AI?input=${query}`, {}, {
-                withCredentials: true,
-            })
-            setResObj({ text: res.data });
+        if (isLoggedIn) {
+            setResObj({ text: await apiRequest("POST", `/api/chat/AI?input=${query}`, {}) });
         }
-        catch {
-            setResObj({ text: "AI chat feature is currently unavailable. Please try again later." });
+        else {
+            setResObj({ text: "AI chat feature is currently unavailable. Please login to continue." });
         }
-        finally {
-            setDynamicRes("");
-            setCurrentIndex(0);
-        }
+        setDynamicRes("");
+        setCurrentIndex(0);
+
     }
 
     const handleLogClick = async () => {
-        setIsLogVisible(prev => !prev);
-        if (!isLogVisible) {
-            const res = await axios.get("http://52.9.162.97:8080/api/user/history", {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            setLog(res.data);
+        if (isLoggedIn) {
+            if (!showLog) {    //request Chat History only if you're opening it
+                setLog(await apiRequest("GET", "/api/user/data/history"));
+            }
+            setShowLog(prev => !prev);
+        }
+        else {
+            setResObj({ text: "Chat history feature is currently unavailable. Please login to continue." });
+            setDynamicRes("");
+            setCurrentIndex(0);
         }
     }
 
@@ -113,20 +88,20 @@ function MainPage() {
 
     return (
         <main className="chat">
-            <UserProfile />
+            <UserProfile user={user} setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <ChatBox lightOutline rows={3}
-                className="user1" user="Gemini" avatar={AiAvatar}
+                className="user1" username="Gemini" avatar={AiAvatar}
                 value={dynamicRes} />
 
             <ChatBoxInput lightOutline rows={3}
-                className="user2" user="Yahallo" avatar={userAvatar}
+                className="user2" username={user.username} avatar={userAvatar}
                 value={userQuery}
                 readOnly={isReadOnly}
                 onChange={handleChange}
                 onKeyDown={handleEnter}
                 onLogClick={handleLogClick} />
 
-            {isLogVisible && <ChatHistory log={log} setVis={setIsLogVisible} />}
+            {(isLoggedIn && showLog) && <ChatHistory log={log} setVis={setShowLog} username={user.username} />}
         </main>
     )
 }

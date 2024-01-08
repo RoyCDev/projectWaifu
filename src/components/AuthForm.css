@@ -1,17 +1,13 @@
-.auth-form .dark,
+.auth,
 .profile-details {
-    width: 175px;
-    /* right: 100px; */
+    width: 185px;
+    right: 100px;
 
     padding: 18px 15px;
     border-radius: 12px;
     position: absolute;
     transform-origin: top;
     scale: 1.1;
-}
-
-.auth-form .dark {
-    right: 100px;
 }
 
 form input::selection {
@@ -71,16 +67,6 @@ form input::selection {
     outline: none;
 }
 
-.auth-form .errorMsg,
-.profile-details .errorMsg {
-    color: yellow;
-    height: 24px;
-
-    margin: 8px 0 0 8px;
-    font-size: 8.5px;
-
-}
-
 .auth-form li,
 .profile-details li {
     display: inline;
@@ -110,6 +96,6 @@ form input::selection {
 
     font-size: 12px;
     padding-left: 0;
-    margin-top: 15px;
+    margin-top: 40px;
     margin-bottom: 0;
 }
