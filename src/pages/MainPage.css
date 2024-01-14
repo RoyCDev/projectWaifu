@@ -12,7 +12,7 @@ body {
     width: 1365.33px;
     height: 768px;
     background: url("../assets/background/sand-castle-seagulls-anime-seascape-clouds-beach-summer.jpg");
-    background-size: 100% 100%;
+    background-size: cover;
     z-index: 0;
     position: relative;
 }
@@ -45,10 +45,12 @@ body {
 .user1 img,
 .user2 img {
     position: absolute;
+    object-fit: contain;
 }
 
 .user1 img {
     width: 445px;
+    height: 667.5px;
     left: 265px;
     top: -60px;
     z-index: -1;

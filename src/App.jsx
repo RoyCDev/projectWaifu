@@ -1,4 +1,5 @@
 import MainPage from "./pages/MainPage"
+import ShopPage from "./pages/ShopPage";
 import { useState, useEffect } from "react"
 import { apiRequest } from "./util";
 
@@ -16,9 +17,7 @@ function App() {
         setIsLoggedIn(true);
       }
 
-      catch {
-
-      }
+      catch { }
     }
     init()
 
@@ -27,6 +26,7 @@ function App() {
   return (
     <>
       <MainPage user={user} setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {/* <ShopPage user={user} /> */}
     </>
   )
 }

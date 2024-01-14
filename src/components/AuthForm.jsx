@@ -22,15 +22,16 @@ function AuthForm({ setVis, setIsLoggedIn }) {
     }
 
     const authenticate = async () => {
-        const endPoint = isRegisterMode ? "register" : "login";
-        const res = await apiRequest("POST", `/security/${endPoint}`, inputs);
+        try {
+            const endPoint = isRegisterMode ? "register" : "login";
+            await apiRequest("POST", `/security/${endPoint}`, inputs);
 
-        if (res.message.indexOf("success") !== -1) {
             setVis(false);
             setIsLoggedIn(true);
         }
-        else {
-            setErrorMsg(res.message);
+
+        catch (error) {
+            setErrorMsg(error.response.data);
         }
     }
 
@@ -79,6 +80,9 @@ function AuthForm({ setVis, setIsLoggedIn }) {
                 <ul>
                     <li onClick={toggleMode}>
                         {isRegisterMode ? "Go Back to Login" : "Create an Account"}
+                    </li>
+                    <li>
+                        {/* <button>a</button> */}
                     </li>
                     <li>
                         <button>{isRegisterMode ? "Sign Up" : "Login"}</button>

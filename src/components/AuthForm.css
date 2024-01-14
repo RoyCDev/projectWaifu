@@ -70,6 +70,7 @@ form input::selection {
 .auth-form li,
 .profile-details li {
     display: inline;
+    width: fit-content;
     font-size: 9px;
 }
 

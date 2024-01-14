@@ -45,7 +45,7 @@ function MainPage({ user, setUser, isLoggedIn, setIsLoggedIn }) {
     const chatWithAi = async (query) => {
         setIsReadOnly(true);
         if (isLoggedIn) {
-            setResObj({ text: await apiRequest("POST", `/api/chat/AI?input=${query}`, {}) });
+            setResObj({ text: await apiRequest("POST", `/api/ai/chat?input=${query}`, {}) });
         }
         else {
             setResObj({ text: "AI chat feature is currently unavailable. Please login to continue." });

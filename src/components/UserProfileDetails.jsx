@@ -13,7 +13,7 @@ function UserProfileDetails({ setVis, user, setUser, setIsLoggedIn }) {
     const [isEditPwMode, setIsEditPwMode] = useState(false);
 
     const profile = useRef()
-    const [bio, setBio] = useState({ username: user.username, desc: user.desc });
+    const [bio, setBio] = useState({ username: user.username, description: user.description });
     const [pw, setPw] = useState()
     const [errorMsg, setErrorMsg] = useState()
 
@@ -28,61 +28,71 @@ function UserProfileDetails({ setVis, user, setUser, setIsLoggedIn }) {
     const setToEditBioMode = () => {
         setIsEditBioMode(true);
         setIsEditPwMode(false);
+        setBio({ username: user.username, description: user.description });
+        setErrorMsg();
     }
 
     const setToEditPwMode = () => {
         setIsEditPwMode(true)
         setIsEditBioMode(false);
+        setPw();
+        setErrorMsg();
     }
 
-    const cancelEdit = () => {
+    const exitEdit = () => {
         setIsEditBioMode(false);
-        setBio({ username: user.username, desc: user.desc });
         setIsEditPwMode(false);
-        setPw();
     }
 
     const handleBioSubmit = async (e) => {
         e.preventDefault();
 
-        if (bio.desc !== user.desc) {
-            const res = await apiRequest("POST", "/api/user/change/description", bio.desc);
-            // const res = { message: "success" }
+        if (bio.description !== user.description) {
+            const res = await apiRequest("POST", "/api/user/change/description", bio.description);
             setErrorMsg(res.message)
-            setUser({ ...user, desc: bio.desc })
+            setUser({ ...user, description: bio.description })
         }
 
         if (bio.username !== user.username) {
-            const res = await apiRequest("POST", "/api/user/change/username", bio.username);
-            // const res = { message: "success" }
-            if (res.message.indexOf("success") !== -1) {
+            try {
+                const res = await apiRequest("POST", "/api/user/change/username", bio.username);
                 setUser({ ...user, username: bio.username })
-                setIsEditBioMode(false);
-                setIsEditPwMode(false);
+                exitEdit();
+                setErrorMsg(res.message);
             }
-            setErrorMsg(res.message)
+            catch (error) {
+                setErrorMsg(error.response.data);
+            }
         }
 
         else {
-            setIsEditBioMode(false);
-            setIsEditPwMode(false);
+            exitEdit();
         }
     }
 
     const handlePwSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await apiRequest("POST", "/api/user/change/password", pw);
-        if (res.message.indexOf("success") !== -1) {
-            cancelEdit()
+        try {
+            const res = await apiRequest("POST", "/api/user/change/password", pw);
+            exitEdit()
+            setErrorMsg(res.message)
         }
-        setErrorMsg(res.message)
+        catch (error) {
+            setErrorMsg(error.response.data)
+        }
     }
 
     const handleLogout = async () => {
-        await apiRequest("POST", "/security/logout", {});
-        setVis(false);
-        setIsLoggedIn(false);
+        try {
+            await apiRequest("POST", "/security/logout", {});
+            setVis(false);
+            setIsLoggedIn(false);
+        }
+
+        catch (error) {
+            setErrorMsg(error.response.data)
+        }
     }
 
     useEffect(() => {
@@ -114,9 +124,9 @@ function UserProfileDetails({ setVis, user, setUser, setIsLoggedIn }) {
                     onChange={handleBioChange}
                 />
 
-                <label htmlFor="desc"></label>
-                <TextArea className="dark" name="desc" rows={4} readOnly={!isEditBioMode}
-                    value={bio.desc}
+                <label htmlFor="description"></label>
+                <TextArea className="dark" name="description" rows={4} readOnly={!isEditBioMode}
+                    value={bio.description}
                     onChange={handleBioChange} />
             </form>
 
@@ -137,11 +147,11 @@ function UserProfileDetails({ setVis, user, setUser, setIsLoggedIn }) {
                         <button><MdSave /></button>
                     </p>
 
-                    <Input type="password" name="current" placeholder="Current"
-                        value={pw?.current || ""}
+                    <Input type="password" name="oldpassword" placeholder="Current"
+                        value={pw?.oldpassword || ""}
                         onChange={handlePwChange} />
-                    <Input type="password" name="new" placeholder="New"
-                        value={pw?.new || ""}
+                    <Input type="password" name="newpassword" placeholder="New"
+                        value={pw?.newpassword || ""}
                         onChange={handlePwChange} />
                 </form>
             }
@@ -149,7 +159,7 @@ function UserProfileDetails({ setVis, user, setUser, setIsLoggedIn }) {
             <ul>
                 {(!isEditBioMode && !isEditPwMode) ?
                     <li onClick={setToEditPwMode}> Change Password </li> :
-                    <li onClick={cancelEdit}> Cancel edits </li>
+                    <li onClick={exitEdit}> Cancel edits </li>
                 }
                 <li><button onClick={handleLogout}>Logout</button></li>
             </ul>

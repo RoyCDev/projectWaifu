@@ -1,0 +1,52 @@
+.preview {
+    position: absolute;
+    color: white;
+    top: 105px;
+    left: 57%;
+    font-family: Gabriola;
+    font-size: 35px;
+
+    display: grid;
+    grid-template-rows: max-content 288px max-content;
+    grid-template-columns: 512px;
+}
+
+.preview .chat {
+    scale: 0.375;
+    transform-origin: top left;
+    border-radius: 55px;
+    opacity: 0.96;
+
+    box-shadow: 0 0 50px 5px rgba(255, 92, 66, 0.2);
+}
+
+.preview .buy-tag {
+    position: absolute;
+    font-size: 12px;
+    font-family: KristenITC;
+
+    background-color: rgba(0, 123, 0, 0.65);
+    line-height: 1;
+    padding: 3px 12.50px 2px;
+    border-radius: 15px;
+
+    bottom: 5px;
+    right: 0;
+    z-index: 1;
+}
+
+.preview .buy {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform-origin: top right;
+    padding: 3px 11px 3px 6px;
+    border-radius: 10px;
+    scale: 1.9;
+
+    margin-top: 22.5px;
+    justify-self: end;
+}
+
+.preview .buy img {
+    margin-right: 0;
+    width: 21px;
+}

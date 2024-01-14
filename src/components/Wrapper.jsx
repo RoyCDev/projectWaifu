@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import "./Wrapper.css"
 
-function Wrapper({ className, children }) {
+function Wrapper({ className, children, ...rest }) {
     const classes = classNames("outline", className)
     return (
-        <div className={classes}>{children}</div>
+        <div className={classes} {...rest}>{children}</div>
     )
 }
 
