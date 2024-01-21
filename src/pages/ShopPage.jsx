@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Wrapper from "../components/Wrapper"
 import ShopList from "../components/ShopList";
 import CoinBalance from "../components/CoinBalance";
 import MainPagePreview from "../components/MainPagePreview";
+
 import { IoChevronBackOutline, IoPerson } from "react-icons/io5";
 import { FaRobot, FaImage } from "react-icons/fa6";
 import "./ShopPage.css"
@@ -36,10 +38,10 @@ function ShopPage({ user }) {
 
     return (
         <main className="shop">
-            <Wrapper className="shop-gradiant dark">
-                <div className="shop-header">
+            <Wrapper className="shop-gradiant" style="dark">
+                <Link className="shop-header" to="/">
                     <IoChevronBackOutline /> Main
-                </div>
+                </Link>
                 <nav className="shop-nav">
                     <ul>
                         <li className="product-type">
@@ -52,7 +54,7 @@ function ShopPage({ user }) {
                 <ShopList type={productType} setSelectedItem={setSelectedItem} />
             </Wrapper>
 
-            <CoinBalance className="user-balance" amount={375} />
+            <CoinBalance className="user-balance" amount={user.coins} />
             {!!selectedItem &&
                 <MainPagePreview type={productType}
                     setSelectedItem={setSelectedItem} selectedItem={selectedItem} user={user} />

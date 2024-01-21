@@ -1,33 +1,25 @@
+import { useUserFetch, useLogFetch } from "./util";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom'
+
 import MainPage from "./pages/MainPage"
 import ShopPage from "./pages/ShopPage";
-import { useState, useEffect } from "react"
-import { apiRequest } from "./util";
 
 function App() {
-  const [user, setUser] = useState({ username: "Guest" });
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const info = await apiRequest("GET", "/api/user/data/info")
-        const profile = await apiRequest("GET", "/api/user/data/profile")
-
-        setUser({ ...info, ...profile });
-        setIsLoggedIn(true);
-      }
-
-      catch { }
-    }
-    init()
-
-  }, [isLoggedIn])
+  const { data, isPending } = useUserFetch();
+  const isLoggedIn = !!data
+  useLogFetch();
 
   return (
-    <>
-      <MainPage user={user} setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      {/* <ShopPage user={user} /> */}
-    </>
+    <BrowserRouter >
+      <Routes>
+        <Route path="/" element={<MainPage user={data || { username: "Guest" }} isLoggedIn={isLoggedIn} />} />
+        <Route path="/shop" element={(!isPending) &&
+          (isLoggedIn ? <ShopPage user={data} /> : <Navigate to="/" />)}
+        />
+        <Route path='*' element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter >
   )
 }
 

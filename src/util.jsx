@@ -1,30 +1,32 @@
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
-async function apiRequest(type, path, body = {}) {
-    const BASE_URL = "http://52.9.162.97:8080";
-    const CONFIG = {
-        withCredentials: true,
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }
+const apiRequest = axios.create({
+    baseURL: "http://localhost:8080",
+    withCredentials: true,
+    headers: { 'Content-Type': 'application/json' }
+})
 
-    switch (type) {
-        case "GET":
-            console.log(`${BASE_URL}${path}`)
-            const get = await axios.get(`${BASE_URL}${path}`, CONFIG)
-            console.log(get.data)
-            return get.data;
+const useUserFetch = () => useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+        const info = await apiRequest.get("/api/user/data/info");
+        const profile = await apiRequest.get("/api/user/data/profile");
+        const coin = await apiRequest.get("/api/user/data/coins");
+        return { ...info.data, ...profile.data, ...coin.data }
+    },
+    retry: false,
+    refetchOnWindowFocus: false
+})
 
-        case "POST":
-            console.log(`${BASE_URL}${path}`)
-            const post = await axios.post(`${BASE_URL}${path}`, body, CONFIG)
-            console.log(post.data)
-            return post.data;
+const useLogFetch = () => useQuery({
+    queryKey: ["chat history"],
+    queryFn: async () => {
+        const res = await apiRequest.get("/api/user/data/history")
+        return res.data
+    },
+    retry: false,
+    refetchOnWindowFocus: false
+})
 
-        default:
-            console.log("unsupport type");
-    }
-}
-
-export { apiRequest }
+export { apiRequest, useUserFetch, useLogFetch }

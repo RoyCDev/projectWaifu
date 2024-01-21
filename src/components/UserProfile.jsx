@@ -3,10 +3,10 @@ import { useState } from "react"
 import avatar from "../assets/avatar/Guest.png"
 import ErrorMsg from "./ErrorMsg"
 import AuthForm from "./AuthForm"
-import UserProfileDetails from "./UserProfileDetails"
+import AboutMe from "./AboutMe"
 import "./userProfile.css"
 
-function UserProfile({ user, setUser, isLoggedIn, setIsLoggedIn }) {
+function UserProfile({ user, isLoggedIn }) {
     const [showForm, setShowForm] = useState(false);
 
     const handleClick = () => {
@@ -18,9 +18,8 @@ function UserProfile({ user, setUser, isLoggedIn, setIsLoggedIn }) {
             <section className="profile">
                 {showForm && (
                     isLoggedIn ?
-                        <UserProfileDetails setVis={setShowForm} user={user}
-                            setUser={setUser} setIsLoggedIn={setIsLoggedIn} /> :
-                        <AuthForm setVis={setShowForm} setIsLoggedIn={setIsLoggedIn} />
+                        <AboutMe setVis={setShowForm} user={user} /> :
+                        <AuthForm setVis={setShowForm} />
                 )}
                 <img onClick={handleClick} src={avatar} alt="profile img" />
             </section>

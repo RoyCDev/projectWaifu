@@ -1,24 +1,20 @@
 import NameTag from "./NameTag"
 import TextArea from "./TextArea";
-import classNames from "classnames";
 
-function ChatBoxInput({ className, username, avatar, light, lightOutline, dark, darkOutline, onLogClick, ...rest }) {
-    const style = classNames({
-        "light": light,
-        "light-outline": lightOutline,
-        "dark": dark,
-        "dark-outline": darkOutline
-    })
-
+function ChatBoxInput({ className, username, avatar, style, navActions, ...rest }) {
     return (
         <article className={className}>
             <img src={avatar} alt="" />
             <NameTag>{username}</NameTag>
-            <TextArea className={style} placeholder="<Type Something Here>" {...rest}>
+            <TextArea style={style} rows={3}
+                placeholder="<Type Something Here>"
+                name="user2"
+                {...rest}>
+
                 <nav className="chatBoxNav">
                     <ul>
-                        <li onClick={onLogClick}>Chat History</li>
-                        <li>Shop</li>
+                        <li onClick={navActions.handleLogClick}>Chat History</li>
+                        <li onClick={navActions.handleShopClick}>Shop</li>
                         <li>Preferences</li>
                     </ul>
                 </nav>

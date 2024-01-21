@@ -1,14 +1,14 @@
-.profile-details {
+.about-me {
     padding: 18px 15px 16px;
 }
 
-.profile-details svg {
-    font-size: 14px;
+.about-me svg {
+    font-size: 15px;
 }
 
 .bio-header,
 .pw-header,
-.profile-details span {
+.about-me span {
     user-select: none;
 }
 
@@ -27,56 +27,57 @@
     display: block;
 }
 
-.bio-form .username {
-    height: 23px;
+.account-settings-form {
+    display: grid;
+    grid-template-rows: max-content 23px 59.5px;
 }
 
-.bio-form .border-left {
-    margin-right: 5px;
+.account-settings-form .border-left {
+    margin-right: 4px;
 }
 
-.bio-form input {
+.account-settings-form .username input {
     width: calc(100% - 4.4px);
     padding-left: 7px;
 }
 
-.bio-form input:read-only {
+.account-settings-form input:read-only {
     font-size: 14px;
     background-color: transparent;
     padding-top: 3px;
     cursor: default;
 }
 
-.profile-details input::placeholder {
+.account-settings-form input::placeholder {
     color: light-gray;
-    font-size: 8.5px;
+    font-size: 8px;
 }
 
-.bio-form .outline {
+.account-settings-form .outline {
     font-size: 9px;
     background-color: rgba(0, 0, 0, 0.65);
 
-    margin: 4px 0 6px 0;
+    margin-top: 4px;
     padding: 3px 3px 0 0;
     border-radius: 5px;
 }
 
-.bio-form textarea {
+.account-settings-form textarea {
     padding: 0 7px 0 3.5px;
 }
 
-.bio-form textarea::-webkit-scrollbar {
+.account-settings-form textarea::-webkit-scrollbar {
     width: 5px;
 }
 
-.bio-form textarea::-webkit-scrollbar-thumb {
+.account-settings-form textarea::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.30);
     border-radius: 5px;
 }
 
 .stats {
     width: 97%;
-    margin: 0 auto;
+    margin: 6px auto 0;
 
     display: grid;
     grid-template-areas:
@@ -116,23 +117,15 @@
 
 .pw-header {
     font-size: 8.5px;
-    margin: 3px 0 0 0;
+    margin: 0;
 }
 
-.pw-header svg {
-    vertical-align: middle;
-}
-
-.pw-header button {
-    margin-left: 5px;
-}
-
-.pw-form {
+.pw {
     display: grid;
-    row-gap: 2px;
-    margin-bottom: -29px;
+    row-gap: 3px;
+    margin-top: 5px;
 }
 
-.pw-form div {
+.pw div {
     display: flex;
 }

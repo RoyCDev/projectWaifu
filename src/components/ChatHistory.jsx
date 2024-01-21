@@ -1,4 +1,7 @@
 import { useRef, useEffect, useLayoutEffect } from "react"
+import { queryClient } from "../main";
+
+// import { useInfiniteQuery } from "@tanstack/react-query";
 
 import ChatBox from "./ChatBox"
 import NameTag from "./NameTag";
@@ -7,9 +10,11 @@ import userAvatar from "../assets/avatar/guest.png"
 
 import "./ChatHistory.css"
 
-function ChatHistory({ log, setVis, username }) {
+
+function ChatHistory({ setVis, username }) {
     const logContainer = useRef();
     const logContent = useRef();
+    const log = queryClient.getQueryData(["chat history"])
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -27,14 +32,14 @@ function ChatHistory({ log, setVis, username }) {
         // setTimeout(() => chatContent.current.scrollTop = chatContent.current.scrollHeight, 50)
     }, [])
 
-    const renderedLog = log.map((entry) => {
+    const renderedLog = log.map((entry, i) => {
         return (
             <>
-                <ChatBox light
+                <ChatBox style="light"
                     className="past-convo u2" username={username} avatar={userAvatar}
                     value={entry.input} />
 
-                <ChatBox light
+                <ChatBox style="light"
                     className="past-convo u1" username="Gemini" avatar={AiAvatar}
                     value={entry.response} />
             </>

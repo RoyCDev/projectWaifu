@@ -1,16 +1,19 @@
 import { useState, useRef, useEffect } from "react";
+
 import { apiRequest } from "../util";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../main";
 
 import ErrorMsg from "./ErrorMsg"
 import Input from "./Input";
 import "./AuthForm.css"
 
-function AuthForm({ setVis, setIsLoggedIn }) {
+function AuthForm({ setVis }) {
     const [inputs, setInputs] = useState();
     const [isRegisterMode, setIsRegisterMode] = useState(false);
     const [errorMsg, setErrorMsg] = useState()
 
-    const auth = useRef();
+    const authRef = useRef();
 
     const handleChange = (e) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -18,49 +21,41 @@ function AuthForm({ setVis, setIsLoggedIn }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        authenticate();
+        authenticate([isRegisterMode, inputs]);
     }
 
-    const authenticate = async () => {
-        try {
+    const { mutate: authenticate, isPending } = useMutation({
+        mutationFn: async ([isRegisterMode, inputs]) => {
             const endPoint = isRegisterMode ? "register" : "login";
-            await apiRequest("POST", `/security/${endPoint}`, inputs);
-
+            return await apiRequest.post(`/security/${endPoint}`, inputs);
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(["user", "chat history"]);
             setVis(false);
-            setIsLoggedIn(true);
-        }
-
-        catch (error) {
-            setErrorMsg(error.response.data);
-        }
-    }
+        },
+        onError: (error) => setErrorMsg(error.response.data.message)
+    })
 
     const toggleMode = () => {
         setInputs()
         setIsRegisterMode(prev => !prev);
-
-        if (!isRegisterMode) {
-            setErrorMsg("Password must have at least 6 characters");
-        }
-        else {
-            setErrorMsg();
-        }
+        setErrorMsg(isRegisterMode ? undefined : "Password must have at least 6 characters");
     }
 
     useEffect(() => {
         const handleClickOutside = (e) => {
-            if (!auth.current.contains(e.target) && e.target.alt !== "profile img") {
+            if (!authRef.current.contains(e.target) && e.target.alt !== "profile img") {
                 setVis(false);
             }
         }
-        document.addEventListener("click", handleClickOutside, true);
+        document.addEventListener("mousedown", handleClickOutside, true);
 
-        return () => document.removeEventListener("click", handleClickOutside, true);
+        return () => document.removeEventListener("mousedown", handleClickOutside, true);
     }, [])
 
 
     return (
-        <div className="dark outline auth" ref={auth}>
+        <div className="dark outline auth" ref={authRef}>
             {!!errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
             <form className="auth-form" onSubmit={handleSubmit}>
                 {isRegisterMode &&
@@ -80,9 +75,6 @@ function AuthForm({ setVis, setIsLoggedIn }) {
                 <ul>
                     <li onClick={toggleMode}>
                         {isRegisterMode ? "Go Back to Login" : "Create an Account"}
-                    </li>
-                    <li>
-                        {/* <button>a</button> */}
                     </li>
                     <li>
                         <button>{isRegisterMode ? "Sign Up" : "Login"}</button>

@@ -1,5 +1,5 @@
 .auth,
-.profile-details {
+.about-me {
     width: 185px;
     right: 100px;
 
@@ -16,14 +16,14 @@ form input::selection {
 
 .auth-form input,
 .auth-form button,
-.profile-details input,
-.profile-details button {
+.about-me input,
+.about-me button {
     font-family: inherit;
 }
 
 .auth-form label,
 .auth-form ul,
-.profile-details ul {
+.about-me ul {
     user-select: none;
 }
 
@@ -53,7 +53,7 @@ form input::selection {
 }
 
 .auth-form input,
-.profile-details input {
+.about-me input {
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
 
@@ -68,19 +68,19 @@ form input::selection {
 }
 
 .auth-form li,
-.profile-details li {
+.about-me li {
     display: inline;
     width: fit-content;
     font-size: 9px;
 }
 
 .auth-form li:hover,
-.profile-details li:hover {
+.about-me li:hover {
     color: yellow;
 }
 
 .auth-form button,
-.profile-details button {
+.about-me button {
     background-color: transparent;
     border: none;
     color: inherit;
@@ -91,7 +91,7 @@ form input::selection {
 }
 
 .auth-form ul,
-.profile-details ul {
+.about-me ul {
     display: flex;
     flex-direction: column;
 

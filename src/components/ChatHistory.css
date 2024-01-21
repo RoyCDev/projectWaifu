@@ -3,6 +3,7 @@
     right: 140px;
     top: 150px;
 
+
     overflow: hidden;
     scale: 1.1;
     background: radial-gradient(rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
@@ -52,12 +53,8 @@
 
 .past-convo .outline {
     border-radius: 8.5px;
-    padding-top: 4px;
-    padding-bottom: 1.5px;
-}
-
-.past-convo textarea {
-    padding: 0 4px;
+    padding: 4px 7px 1.5px;
+    min-height: 16px;
 }
 
 .past-convo .nameTag {

@@ -25,10 +25,10 @@ function MainPagePreview({ type, setSelectedItem, selectedItem, user }) {
                 className="chat"
                 style={{ backgroundImage: `url(${preview.background})`, backgroundSize: "cover" }}>
 
-                <ChatBox lightOutline rows={3}
+                <ChatBox style="light-outline"
                     className="user1" username="Gemini" avatar={preview["ai-avatar"]} />
 
-                <ChatBox lightOutline rows={4}
+                <ChatBox style="light-outline"
                     className="user2" username={user.username} avatar={preview["user-profile"]} />
             </section>
 

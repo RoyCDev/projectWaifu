@@ -1,21 +1,12 @@
 import NameTag from "./NameTag"
-import TextArea from "./TextArea";
+import Wrapper from "./Wrapper";
 
-import classNames from "classnames";
-
-function ChatBox({ className, username, avatar, light, lightOutline, dark, darkOutline, ...rest }) {
-    const style = classNames({
-        "light": light,
-        "light-outline": lightOutline,
-        "dark": dark,
-        "dark-outline": darkOutline
-    })
-
+function ChatBox({ className, username, avatar, style, value }) {
     return (
         <article className={className}>
             <img src={avatar} alt="" />
             <NameTag>{username}</NameTag>
-            <TextArea readOnly className={style} {...rest} />
+            <Wrapper style={style}> <div>{value}</div> </Wrapper>
         </article>
     )
 }

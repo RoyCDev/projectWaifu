@@ -10,13 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "@tanstack/query-async-storage-persister": "^5.17.15",
+    "@tanstack/react-query": "^5.17.15",
+    "@tanstack/react-query-devtools": "^5.17.18",
+    "@tanstack/react-query-persist-client": "^5.17.15",
     "axios": "^1.6.2",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "usernames": "^1.0.0"
+    "react-router-dom": "^6.21.3",
+    "usernames": "^1.0.0",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

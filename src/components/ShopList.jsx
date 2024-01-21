@@ -7,7 +7,6 @@ import bg2 from "../assets/background/yami-yami.jpg"
 
 import Wrapper from "./Wrapper";
 import CoinBalance from "./CoinBalance"
-import { useState } from "react"
 import "./ShopList.css"
 
 function ShopList({ type, setSelectedItem }) {
@@ -29,7 +28,7 @@ function ShopList({ type, setSelectedItem }) {
 
     const renderedList = items[type].map(item => {
         return (
-            <Wrapper className={`dark ${type}`}>
+            <Wrapper className={type} style="dark">
                 <CoinBalance amount={item.cost} />
                 <img className="product" src={item.img} alt="" onClick={() => { handleClick(item) }} />
             </Wrapper >

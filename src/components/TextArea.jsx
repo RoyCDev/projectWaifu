@@ -1,31 +1,18 @@
-import { useRef, useLayoutEffect } from "react";
-
 import Wrapper from "./Wrapper";
 import "./TextArea.css"
 
-function TextArea({ className, children, ...rest }) {
-    const textArea = useRef()
-
+function TextArea({ style, children, name, ...rest }) {
     const handleOnDragDrop = (e) => {
         e.dataTransfer.effectAllowed = "none"
         e.preventDefault();
     }
 
-    const adjustHeight = () => {
-        if (!rest.rows) {
-            textArea.current.style.height = '0px';
-            textArea.current.style.height = `${textArea.current.scrollHeight}px`
-            textArea.current.style.overflowY = "hidden"
-            // setTimeout(() => textArea.current.style.height = `${textArea.current.scrollHeight + 1}px`, 50)
-        }
-    }
-
-    useLayoutEffect(adjustHeight, []);
-
     return (
-        <Wrapper className={className}>
+        <Wrapper style={style}>
+            <label htmlFor={name}></label>
             <textarea
-                ref={textArea}
+                name={name}
+                id={name}
                 onDragStart={handleOnDragDrop} onDrop={handleOnDragDrop}
                 {...rest}>
             </textarea>
